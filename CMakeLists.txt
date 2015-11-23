@@ -107,14 +107,16 @@ set(PLATFORM_SPECIFIC_HEADERS
 )
 endif()
 
-include_directories(
+set(INCLUDE_DIRS 
   /usr/local/include/GLFW
   /usr/include/GLFW
   ${COCOS2D_ROOT}/cocos
   ${COCOS2D_ROOT}/cocos/platform
   ${COCOS2D_ROOT}/cocos/audio/include/
-  Classes
-)
+  Classes)
+
+include_directories( ${INCLUDE_DIRS} )
+
 if ( WIN32 )
   include_directories(
   ${COCOS2D_ROOT}/external/glfw3/include/win32
@@ -124,20 +126,7 @@ endif( WIN32 )
 
 file(GLOB GAME_SRC Classes/*.cpp ${PLATFORM_SPECIFIC_SRC})
 
-
-#set(GAME_SRC
-#Classes/AppDelegate.cpp
-#Classes/HelloWorldScene.cpp
-#${PLATFORM_SPECIFIC_SRC}
-#)
-
 file(GLOB GAME_HEADERS Classes/*.cpp ${PLATFORM_SPECIFIC_HEADERS})
-
-#set(GAME_HEADERS
-#Classes/AppDelegate.h
-#Classes/HelloWorldScene.h
-#${PLATFORM_SPECIFIC_HEADERS}
-#)
 
 if(GAME_HEADERS)
   if ( WIN32 )
@@ -155,10 +144,14 @@ endif()
 
 target_link_libraries(${APP_NAME} cocos2d)
 
+
 set(APP_BIN_DIR "${CMAKE_BINARY_DIR}/bin")
 
 set_target_properties(${APP_NAME} PROPERTIES
      RUNTIME_OUTPUT_DIRECTORY  "${APP_BIN_DIR}")
+
+set(TEST_DIR Tests)
+add_subdirectory(Tests)
 
 if ( WIN32 )
   #also copying dlls to binary directory for the executable to run
