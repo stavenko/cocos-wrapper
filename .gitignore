@@ -1,1 +1,9 @@
 *.pyc
+build/
+linux-build/
+bin/
+Tests
+Classes
+Resources
+cocos2d
+
