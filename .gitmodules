@@ -1,0 +1,4 @@
+[submodule "foobar"]
+	path = foobar
+	url = https://github.com/stavenko/foobar
+	branch = master
